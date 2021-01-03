@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Tec_Stub>
+      <version>0.2.0</version>
+    </Tec_Stub>
+  </modules>
+  <adminhtml>
+        <menu>
+            <stub module="stub">
+                <title>LogIn Attempts</title>
+                <sort_order>90</sort_order>               
+                <children>
+                    <items module="stub">
+                        <title>childs</title>
+                        <sort_order>0</sort_order>
+                        <action>pro/adminhtml_pro</action>
+                    </items>
+                </children>
+            </stub>
+        </menu> 
+  </adminhtml>
+  <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <tec_stub before="Mage_Adminhtml">Tec_Stub_Adminhtml</tec_stub>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+  </admin>
+  <frontend>
+    <routers>
+      <ulogin>
+        <use>standard</use>
+          <args>
+            <module>Tec_Stub</module>
+            <frontName>stub</frontName>
+          </args>
+      </ulogin>
+      <customer>
+                <args>
+                    <modules>
+                        <stub before="Mage_Customer">Tec_Stub_Customer</stub>
+                    </modules>
+                </args>
+      </customer>
+    </routers>
+  </frontend>
+  
+  <global>
+    <blocks>
+      <adminhtml>
+        <rewrite>
+          <customer_grid>Tec_Stub_Block_Adminhtml_Customer_Grid</customer_grid>
+          <customer_edit_tabs>Tec_Stub_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
+        </rewrite>
+      </adminhtml>
+    </blocks>
+
+    <helpers>
+            <stub>
+                <class>Tec_Stub_Helper</class>
+            </stub>
+    </helpers>
+
+    <models>
+            <tec_stub>
+                <class>Tec_Stub_Model</class>
+                <resourceModel>tec_stub_resource</resourceModel>
+            </tec_stub>
+            <tec_stub_resource>
+                <class>Tec_Stub_Model_Resource</class>
+                <entities>
+                    <login>
+                        <table>login_attempts</table>
+                    </login>
+                </entities>
+            </tec_stub_resource>
+    </models>
+
+    <resources>
+            <tec_stub_setup>
+                <setup>
+                    <module>Tec_Stub</module>
+                </setup>
+            </tec_stub_setup>
+    </resources>
+
+  </global>
+</config> 
